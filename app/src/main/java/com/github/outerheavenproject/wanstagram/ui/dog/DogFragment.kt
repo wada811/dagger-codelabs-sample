@@ -38,7 +38,7 @@ class DogFragment : Fragment(),
         dogAdapter = DogAdapter(navigator)
         recycler.layoutManager = GridLayoutManager(context, 2)
         recycler.adapter = dogAdapter
-        presenter = DogPresenter(this, App.Instance.appComponent.dataModule.dogService)
+        presenter = DogPresenter(this, App.Instance.appComponent.dataModule.dogRepository)
 
         lifecycleScope.launch {
             presenter.start()

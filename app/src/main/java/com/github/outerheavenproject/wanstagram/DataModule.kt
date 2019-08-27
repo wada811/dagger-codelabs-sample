@@ -1,5 +1,6 @@
 package com.github.outerheavenproject.wanstagram
 
+import com.github.outerheavenproject.wanstagram.data.DogRepository
 import com.github.outerheavenproject.wanstagram.data.DogService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -19,5 +20,8 @@ class DataModule(okHttpClientModule: OkHttpClientModule) {
     }
     val dogService: DogService by lazy {
         retrofit.create() as DogService
+    }
+    val dogRepository: DogRepository by lazy {
+        DogRepository(dogService)
     }
 }
