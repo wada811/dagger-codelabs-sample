@@ -1,7 +1,11 @@
 package com.github.outerheavenproject.wanstagram
 
 class AppComponent {
-    val dataModule by lazy {
-        DataModule()
+    private val okHttpClientModule by lazy {
+        OkHttpClientModule()
     }
+    val dataModule by lazy {
+        DataModule(okHttpClientModule)
+    }
+
 }

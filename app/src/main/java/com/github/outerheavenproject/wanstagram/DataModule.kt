@@ -7,13 +7,14 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.create
 
-class DataModule {
+class DataModule(okHttpClientModule: OkHttpClientModule) {
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl("https://dog.ceo/api/")
             .addConverterFactory(
                 Json.asConverterFactory("application/json".toMediaType())
             )
+            .client(okHttpClientModule.okHttpClient)
             .build()
     }
     val dogService: DogService by lazy {
