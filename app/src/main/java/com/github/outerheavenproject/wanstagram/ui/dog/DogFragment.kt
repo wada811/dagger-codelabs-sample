@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.outerheavenproject.wanstagram.App
 import com.github.outerheavenproject.wanstagram.R
 import com.github.outerheavenproject.wanstagram.data.Dogs
 import com.github.outerheavenproject.wanstagram.ui.AppNavigatorImpl
@@ -34,8 +35,7 @@ class DogFragment : Fragment(),
         dogAdapter = DogAdapter(navigator = AppNavigatorImpl())
         recycler.layoutManager = GridLayoutManager(context, 2)
         recycler.adapter = dogAdapter
-
-        presenter = DogPresenter(view = this)
+        presenter = DogPresenter(this, App.Instance.appComponent.dataModule.dogService)
 
         lifecycleScope.launch {
             presenter.start()

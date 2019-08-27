@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.outerheavenproject.wanstagram.App
 import com.github.outerheavenproject.wanstagram.R
 import com.github.outerheavenproject.wanstagram.data.Dogs
 import com.github.outerheavenproject.wanstagram.ui.AppNavigatorImpl
@@ -35,7 +36,7 @@ class ShibaFragment : Fragment(),
         recycler.layoutManager = GridLayoutManager(context, 2)
         recycler.adapter = dogAdapter
 
-        presenter = ShibaPresenter(view = this)
+        presenter = ShibaPresenter(this, App.Instance.appComponent.dataModule.dogService)
 
         lifecycleScope.launch {
             presenter.start()
