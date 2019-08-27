@@ -35,7 +35,7 @@ class DogFragment : Fragment(),
         val navigator = (requireActivity() as MainActivity).let {
             it.subComponent.mainActivityModule.appNavigator(it)
         }
-        dogAdapter = DogAdapter(navigator)
+        dogAdapter = DogAdapter(childFragmentManager, navigator)
         recycler.layoutManager = GridLayoutManager(context, 2)
         recycler.adapter = dogAdapter
         presenter = DogPresenter(this, App.Instance.appComponent.dataModule.dogRepository)

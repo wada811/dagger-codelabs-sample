@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.github.outerheavenproject.wanstagram.R
 
 class DogAdapter(
+    private val childFragmentManager: FragmentManager,
     private val navigator: AppNavigator
 ) : ListAdapter<String, DogViewHolder>(DogDiffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder =
@@ -29,6 +31,10 @@ class DogAdapter(
             .into(holder.image)
         holder.itemView.setOnClickListener {
             navigator.navigateToDetail(dogUrl)
+        }
+        holder.itemView.setOnLongClickListener {
+            navigator.navigateToAction(childFragmentManager, dogUrl)
+            true
         }
     }
 }

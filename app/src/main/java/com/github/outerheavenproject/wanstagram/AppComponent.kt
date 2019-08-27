@@ -11,7 +11,7 @@ class AppComponent {
     val dataModule by lazy {
         DataModule(okHttpClientModule)
     }
-    val appNavigator: (Context) -> AppNavigator by lazy {
+    val createNavigator: (Context) -> AppNavigator by lazy {
         return@lazy { context: Context -> AppNavigatorImpl(context) }
     }
 
