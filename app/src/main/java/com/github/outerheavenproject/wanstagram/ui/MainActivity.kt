@@ -3,14 +3,25 @@ package com.github.outerheavenproject.wanstagram.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
+import com.github.outerheavenproject.wanstagram.App
+import com.github.outerheavenproject.wanstagram.MainActivitySubcomponent
 import com.github.outerheavenproject.wanstagram.R
 import com.github.outerheavenproject.wanstagram.ui.dog.DogFragment
 import com.github.outerheavenproject.wanstagram.ui.shiba.ShibaFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
+    val appNavigator by lazy {
+        App.Instance.appComponent.appNavigator
+    }
+
+    val subComponent: MainActivitySubcomponent by lazy {
+        App.Instance.appComponent.createMainActivitySubcomponent(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.main_activity)
 
         if (savedInstanceState == null) {

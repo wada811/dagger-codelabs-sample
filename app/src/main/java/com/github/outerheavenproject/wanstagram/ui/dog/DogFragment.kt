@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.outerheavenproject.wanstagram.App
 import com.github.outerheavenproject.wanstagram.R
 import com.github.outerheavenproject.wanstagram.data.Dogs
-import com.github.outerheavenproject.wanstagram.ui.AppNavigatorImpl
 import com.github.outerheavenproject.wanstagram.ui.DogAdapter
+import com.github.outerheavenproject.wanstagram.ui.MainActivity
 import kotlinx.coroutines.launch
 
 class DogFragment : Fragment(),
@@ -32,7 +32,10 @@ class DogFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         val recycler = view.findViewById<RecyclerView>(R.id.recycler)
-        dogAdapter = DogAdapter(navigator = AppNavigatorImpl())
+        val navigator = (requireActivity() as MainActivity).let {
+            it.subComponent.mainActivityModule.appNavigator(it)
+        }
+        dogAdapter = DogAdapter(navigator)
         recycler.layoutManager = GridLayoutManager(context, 2)
         recycler.adapter = dogAdapter
         presenter = DogPresenter(this, App.Instance.appComponent.dataModule.dogService)
